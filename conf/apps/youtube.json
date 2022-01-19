@@ -1,0 +1,1 @@
+{"youtube": [{"search": {"module": "modules.apps.youtube", "_class": "YTController", "method": "search", "janet_input": true, "thread_q": false, "args": [], "kwargs": {}}}]}
