@@ -1,2 +1,0 @@
-# janet
-A digital assistant
