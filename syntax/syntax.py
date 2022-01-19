@@ -1,4 +1,6 @@
 # Lists of possible syntax in a given situation for checking against user input
+# Only using greeting syntax at the moment
+
 confirm_syntax = ["yes", "yeah", "ok", "yep", "try again", "yes please"]
 decline_syntax = ["no", "nah", "nope", "don't know", "no change it", "change it"]
 stop_syntax = ["janet stop", "janet quit", "janet exit"]

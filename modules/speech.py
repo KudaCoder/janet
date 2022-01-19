@@ -1,12 +1,14 @@
 from nltk.tokenize import word_tokenize
-import nltk
+
+# import nltk
 
 from pattern.text.en import singularize
 import speech_recognition as sr
 from gtts import gTTS
 import os
 
-nltk.download("all")
+# Not really using this yet
+# nltk.download("all")
 
 
 class Speech:
@@ -19,6 +21,7 @@ class Speech:
 
         if not os.environ.get("DEBUG"):
             with sr.Microphone() as source:
+                # This is all setup for my mic and may need adjusting
                 r = sr.Recognizer()
                 r.adjust_for_ambient_noise(source, duration=0.2)
                 r.energy_threshold = 775
@@ -36,7 +39,6 @@ class Speech:
                         "Uh oh! Couldn't request results from Google Speech Recognition"
                         f" service; {e}"
                     )
-
         else:
             audio_text = input("Please type command correctly: \n")
 
@@ -47,13 +49,13 @@ class Speech:
         if audio_text == "manual input":
             self.speak("Please enter the value")
             audio_text = input(": ").lower()
-        word_tokens = word_tokenize(audio_text)
 
         # # This is taking too many words out and changing the meaning of the sentence
         # tagged = nltk.pos_tag(word_tokens)
         # stop_words = set(stopwords.words('english'))
         # clean_tokens = [w for w in tagged if w[0].lower() not in stop_words]
 
+        word_tokens = word_tokenize(audio_text)
         singulars = [singularize(w) for w in word_tokens]
 
         return singulars

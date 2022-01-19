@@ -9,11 +9,10 @@ from google.auth.transport.requests import Request
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 
-# TODO: Use environ!
-GMAIL_API_ID = "AIzaSyA6PZdSGX1f8QoWmeTZYXBB1jM_7sYOkK8"
-GMAIL_API_SECRET = "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"
-SCOPES = ["https://mail.google.com/"]
-OUR_EMAIL = "warren.snowden@gmail.com"
+GMAIL_API_ID = os.environ.get("GMAIL_API_ID")
+GMAIL_API_SECRET = os.environ.get("GMAIL_API_SECRET")
+SCOPES = os.environ.get("SCOPES")
+OUR_EMAIL = os.environ.get("OUR_EMAIL")
 
 
 def get_session_cookies():
@@ -28,7 +27,6 @@ def gmail_authenticate():
         with open("conf/token.pickle", "rb") as token:
             creds = pickle.load(token)
     if not creds or not creds.valid:
-        print("gmail")
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
@@ -57,7 +55,7 @@ def send_email(subject, body):
             .messages()
             .send(
                 userId="me",
-                body=build_message("warren.snowden@gmail.com", subject, body),
+                body=build_message(OUR_EMAIL, subject, body),
             )
             .execute()
         )

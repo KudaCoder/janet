@@ -40,6 +40,7 @@ class Janet:
         JANET = True
         while JANET:
             print("Awaiting your command!!")
+
             response = None
             self.triggers = triggers
             self.triggers.run()
@@ -53,7 +54,7 @@ class Janet:
                 _cls = app.get_class()
                 _class = _cls(self.speech)
 
-                # TODO: Sort out the thread Q
+                # TODO: Sort out the thread Q - thread pool?
                 if app.janet_input:
                     app.kwargs["janet_command"] = " ".join(janet_command)
 

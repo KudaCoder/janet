@@ -14,14 +14,6 @@ class User(Base):
     jobs = relationship("Job")
     client = relationship("Client")
 
-    # @classmethod
-    # def search_by_name(cls, name):
-    #   return db.session.query(User).filter(User.username == name)
-
-    # @classmethod
-    # def find_by_name(cls, name):
-    #   return db.session.query(User).filter(User.username == name).one()
-
     def save(self, db):
         db.add(self)
         db.commit()

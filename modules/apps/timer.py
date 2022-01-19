@@ -1,4 +1,4 @@
-from modules.utils import duration
+from modules.duration import duration
 
 from word2number import w2n
 from time import sleep
