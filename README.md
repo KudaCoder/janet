@@ -1,4 +1,4 @@
-# janet
+# Janet
 
 A digital assistant for home automation and environmental control for my snake, Kaa!
 
