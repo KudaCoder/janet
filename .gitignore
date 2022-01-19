@@ -128,3 +128,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# janet related stuff
+conf/credentials.json
+conf/token.pickle
