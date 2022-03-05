@@ -1,1 +1,1 @@
-{"google": [{"search": {"module": "modules.apps.web", "_class": "WebController", "method": "search", "janet_input": true, "thread_q": false, "args": [], "kwargs": {}}}]}
+{"google": [{"search": {"module": "modules.apps.youtube", "_class": "WebController", "method": "search", "janet_input": true, "thread_q": false, "args": [], "kwargs": {}}}]}
