@@ -65,7 +65,7 @@ class Speech:
         tts = gTTS(output, slow=False)
         janet_audio = "janet_audio.mp3"
         tts.save(janet_audio)
-        os.system(f"play {janet_audio} tempo 1.25")
+        os.system(f"play -q {janet_audio} tempo 1.25")
         os.remove(janet_audio)
 
     @staticmethod
