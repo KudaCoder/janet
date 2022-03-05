@@ -1,4 +1,4 @@
-from modules.comm.email import send_email
+from .email import send_email
 from .redis import RedisWrapper
 
 import threading
