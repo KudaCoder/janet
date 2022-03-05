@@ -1,34 +1,27 @@
-from modules.storage.database import Database
-from modules.comm.command import MExchange
-from modules.speech import Speech
 from modules import library, triggers
-
+from modules.speech import Speech
+from frontend.models import UserUtils
 from syntax.syntax import greetings
 
-import threading
+from dotenv import load_dotenv, find_dotenv
 import random
+
+load_dotenv(find_dotenv())
 
 
 class Janet:
-    def __init__(self, app_library, message_server=None, db_controller=None):
-        self.db_controller = db_controller
-        self.db = None
-        self.user = None
-        if self.db_controller:
-            self.db, self.user = self.db_controller.open_session()
+    def __init__(self, app_library):
+        self.app_lib = app_library
+
+        self.speech = Speech()
+        self.user_utils = UserUtils(self.speech)
+
+        self.user = self.user_utils.get_current_user()
+        if not self.user:
+            self.user = self.user_utils.login_or_create_user()
         self.username = self.user.username if self.user else None
 
-        self.server = message_server
-        self.receive_thread = threading.Thread(target=self.server.receive, daemon=True)
-        self.receive_thread.start()
-
-        self.app_lib = app_library
-        self.speech = Speech()
-
     def goodbye(self):
-        self.db_controller.close_session()
-        self.server.destroy()
-
         self.speech.speak("Goodbye!")
         exit()
 
@@ -42,8 +35,8 @@ class Janet:
             print("Awaiting your command!!")
 
             response = None
-            self.triggers = triggers
-            self.triggers.run()
+            # self.triggers = triggers
+            # self.triggers.run()
 
             janet_command = self.speech.listen()
             if " ".join(janet_command).lower() == "goodbye janet":
@@ -56,7 +49,7 @@ class Janet:
 
                 # TODO: Sort out the thread Q - thread pool?
                 if app.janet_input:
-                    app.kwargs["janet_command"] = " ".join(janet_command)
+                    app.kwargs["janet_command"] = janet_command
 
                 method = getattr(_class, app.method)
                 response = method(*app.args, **app.kwargs)
@@ -65,13 +58,15 @@ class Janet:
                 self.speech.speak(response)
 
 
-if __name__ == "__main__":
+def run():
     app_library = library.AppController()
-    server = MExchange()
-    dbc = Database()
 
-    janet = Janet(app_library, db_controller=dbc, message_server=server)
+    janet = Janet(app_library)
     try:
         janet.entry()
     except KeyboardInterrupt:
         janet.goodbye()
+
+
+if __name__ == "__main__":
+    run()
