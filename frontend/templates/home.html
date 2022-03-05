@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block container%}
+  <h1>Welcome to Janet!</h1>
+  <p>Temp - {{ reading.temp }}  --  Hum - {{ reading.hum }}</p>
+
+  {% for reading in readings %}
+      <p>Temp - {{ reading.temp }}  --  Hum - {{ reading.hum }}  --  Time Taken - {{ reading.time }}</p>
+  {% endfor %}
+{% endblock %}

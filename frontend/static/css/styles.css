@@ -1,0 +1,138 @@
+:root {
+    --nav-bg: rgba(219, 219, 219, .8);
+    --nav-bg-hover: rgba(173, 173, 173, .8);
+    --nav-text-hover: rgba(111, 117, 128, .6);
+    --nav-active: rgba(49, 54, 61, .6);
+    --nav-border-radius: 0rem 0rem .75rem .75rem;
+    --nav-height: 5rem;
+    --nav-v-pad: 1rem;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    height: 100vh;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+/* Navbar section */
+
+section#nav-bar {
+    height:  var(--nav-height);
+}
+grid-container#nav-container {
+    display: grid;
+    grid-template-columns: 15% 1fr 15%;
+    grid-gap: 10px;
+    grid-template-areas: "column-1 column-2 column-3";
+    height: var(--nav-height);
+}
+
+grid-item#nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav li {
+    display: inline-block;
+    position:  relative;
+}
+
+ul a {
+    text-decoration: none;
+    color: black;
+    display:  block;
+    padding: var(--nav-v-pad) 2.5rem;
+    border-radius: var(--nav-border-radius);
+
+    transition: background-color 150ms ease-in,
+        color 300ms ease-out;
+}
+
+ul a:hover {
+    color: var(--nav-text-hover);
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    background-color: var(--nav-active);
+    height: .3rem;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    border-radius: var(--nav-border-radius);
+    transform: scaleX(0);
+}
+
+nav a:hover::after {
+    transform: scaleX(1);
+    transition: transform 350ms ease;
+}
+
+nav a.active::after {
+    transform: scaleX(1);
+}
+
+/* Habitat section */
+
+section#habitat {
+    height: calc(100vh - var(--nav-height) - var(--nav-v-pad));
+}
+
+grid-container#habitat-container {
+    display: grid;
+    grid-template-columns: 20% 2fr;
+    grid-gap: 10px;
+    grid-template-areas: "column-1 column-2";
+}
+
+grid-item.habitat-item {
+    display: flex;
+    flex-direction: column;
+}
+
+grid-item#habitat-side-item {
+    box-shadow: 2px 0 1px -1px grey;
+}
+
+grid-item.habitat-item {
+    height: 80vh;
+}
+
+.side-panel {
+    display:  flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.side-panel ul {
+    list-style:  none;
+    padding:  0;
+}
+
+.side-panel li {
+    padding: 1rem 0;
+}
+
+.side-panel a {
+    padding: .75rem .5rem;
+}
+
+.side-panel a:hover {
+    color: var(--nav-text-hover);
+}
+
+#chart {
+    height: 2rem;
+}
