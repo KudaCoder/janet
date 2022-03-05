@@ -1,4 +1,4 @@
-from modules.redis import RedisWrapper
+from frontend.blueprints.utils import APITools
 
 
 class MonitorController:
@@ -29,7 +29,8 @@ class MonitorController:
     }
 
     def __init__(self, speech):
-        self.redis = RedisWrapper().connect()
+        self.speech = speech
+        self.api_tools = APITools()
 
     def __str__(self):
         return "MonitorController"
@@ -37,10 +38,10 @@ class MonitorController:
     def command(self, command):
         value = ""
         if "temp" in command:
-            temp = self.redis.get("temp").decode("utf-8")
-            value = f"{temp} degrees celcius"
+            reading = self.api_tools.current_reading()
+            value = f"{reading['temp']} degrees celcius"
         elif "hum" in command:
-            hum = self.redis.get("hum").decode("utf-8")
-            value = f"{hum}% RH"
+            reading = self.api_tools.current_reading()
+            value = f"{reading['hum']}% RH"
 
         return value
