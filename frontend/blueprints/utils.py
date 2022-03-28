@@ -34,6 +34,15 @@ class APITools:
     def new_config(self):
         return self.get("/config/new/")
 
+    def set_config(self, form_data):
+        data = form_data
+        data["lights_on_time"] = data["lights_on_time"].isoformat()
+        data["lights_off_time"] = data["lights_off_time"].isoformat()
+        # This data is not needed as his will create new config with new
+        # created on date, but how best to remove?
+        data["created"] = data["created"].isoformat()
+        return self.post("/config/set/", data=data)
+
     def get(self, url, data=None):
         if data is not None:
             data = json.dumps(data)
@@ -47,6 +56,6 @@ class APITools:
         return requests.post(f"{API_URL}{url}", json=json.dumps(data)).json()
 
 
-def pretty_datetime(string):
-    dt = datetime.strptime(string, "%a, %d %b %Y %H:%M:%S GMT")
+def iso_to_timestamp(string):
+    dt = datetime.fromisoformat(string)
     return dt.timestamp()
