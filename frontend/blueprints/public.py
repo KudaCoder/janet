@@ -8,14 +8,10 @@ api_tools = APITools()
 
 @bp.route("/")
 def home():
-    # reading = api_tools.current_reading()
-    reading = None
-    readings = []
-    # readings = api_tools.find_reading_by_period(unit="minutes", time=5)
+    reading = api_tools.current_reading()
 
     context = {
         "reading": reading,
-        "readings": readings,
         "page": "home",
     }
 
