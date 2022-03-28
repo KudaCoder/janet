@@ -4,6 +4,16 @@
 
     <h5 class="text-center mt-2">Readings</h5>
 
-    <div id="chart"></div>
+    <div id="plotly-timeseries"></div>
     
+{% endblock %}
+
+
+{% block scripts %}
+
+    <script>
+        var graph = {{ plot | safe }};
+        Plotly.plot('plotly-timeseries', graph, {});
+    </script>
+
 {% endblock %}

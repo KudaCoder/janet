@@ -2,6 +2,35 @@
 
 {% block content %}
 
-    <h5 class="text-center mt-2">Config</h5>
-    
+	<h5 class="text-center mt-2">Config</h5>
+
+	<form action="{{ url_for('habitat.config') }}" method="POST" id="env_config_form_id">
+		{{ form.csrf_token }}
+
+		<div>
+			<div class="tile left">
+				{{ form.day_h_sp.label }} {{ form.day_h_sp }}
+			</div>
+			<div class="tile left">
+				{{ form.day_l_sp.label }} {{ form.day_l_sp }}
+			</div>
+			<div class="tile left">
+				{{ form.night_h_sp.label }} {{ form.night_h_sp }}
+			</div>
+			<div class="tile left">
+				{{ form.night_l_sp.label }} {{ form.night_l_sp }}
+			</div>
+			<div class="tile left">
+				{{ form.lights_on_time.label }} {{ form.lights_on_time }}
+			</div>
+			<div class="tile left">
+				{{ form.lights_off_time.label }} {{ form.lights_off_time }}
+			</div>
+			<div class="mt-2 left">
+				{{ form.created.label }} - {{ form.created.data | pretty_dt }}
+			</div>
+			<button id="save-btn" class="btn btn-primary left" type="submit">Save Changes</button>
+		</div>
+	</form>
+	
 {% endblock %}
