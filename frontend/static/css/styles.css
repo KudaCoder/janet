@@ -91,7 +91,7 @@ section#habitat {
 
 grid-container#habitat-container {
     display: grid;
-    grid-template-columns: 20% 2fr;
+    grid-template-columns: 20% 1fr;
     grid-gap: 10px;
     grid-template-areas: "column-1 column-2";
 }
@@ -133,6 +133,16 @@ grid-item.habitat-item {
     color: var(--nav-text-hover);
 }
 
-#chart {
-    height: 2rem;
+.tile {
+    width: 15rem;
+    border: 1px solid green;
+}
+
+.tile input {
+    width: 100%;
+}
+
+.left {
+    margin-left: 3rem;
+    margin-bottom: 2.5rem;
 }
