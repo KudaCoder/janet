@@ -4,7 +4,7 @@
 
     <h5 class="text-center mt-2">Readings</h5>
 
-    <div id="plotly-timeseries"></div>
+    <div id="habi_graph"></div>
     
 {% endblock %}
 
@@ -12,8 +12,8 @@
 {% block scripts %}
 
     <script>
-        var graph = {{ plot | safe }};
-        Plotly.plot('plotly-timeseries', graph, {});
+        var graph = {{ habitat_graph | safe }};
+        Plotly.plot('habi_graph', graph, {});
     </script>
 
 {% endblock %}
