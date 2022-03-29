@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request
 
 import plotly.express as px
 import pandas as pd
@@ -22,7 +22,7 @@ def home():
 
 @bp.route("/readings/")
 def readings():
-    readings = api_tools.find_reading_by_period(unit="days", time=1)
+    readings = api_tools.find_reading_by_period(unit="minutes", time=10)
     data = {
         "time": [r["time"] for r in readings],
         "temp": [r["temp"] for r in readings],
@@ -37,12 +37,11 @@ def readings():
     )
     fig = fig.update_xaxes(rangeslider_visible=True)
     fig.update_layout(width=1400, height=500)
-    plot_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    habi_graph = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     context = {
         "page": "habitat",
-        "readings": jsonify(readings),
-        "plot": plot_json,
+        "habitat_graph": habi_graph,
     }
 
     return render_template("readings.html", **context)
@@ -58,15 +57,7 @@ def config():
     config["lights_on_time"] = time.fromisoformat(config["lights_on_time"])
     config["lights_off_time"] = time.fromisoformat(config["lights_off_time"])
     config["created"] = datetime.fromisoformat(config["created"])
-
-    form.lights_on_time.data = config["lights_on_time"]
-    form.lights_off_time.data = config["lights_off_time"]
-    form.lights_off_time.data = config["lights_off_time"]
-    form.day_h_sp.data = config["day_h_sp"]
-    form.day_l_sp.data = config["day_l_sp"]
-    form.night_h_sp.data = config["night_h_sp"]
-    form.night_l_sp.data = config["night_l_sp"]
-    form.created.data = config["created"]
+    form.populate_form(config)
 
     context = {"page": "habitat", "form": form}
     return render_template("config.html", **context)
