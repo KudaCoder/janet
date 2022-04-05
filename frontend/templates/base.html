@@ -20,8 +20,8 @@
 				<nav>
 					<ul>
 						<li><a class="{% if page == 'home' %}active{% endif %}" href="{{ url_for('public.home') }}">Home</a></li>
-						<li><a class="{% if page == 'habitat' %}active{% endif %}" href="{{ url_for('habitat.home') }}">Habitat</a></li>
 						<li><a class="{% if page == 'about' %}active{% endif %}" href="{{ url_for('public.about') }}">About</a></li>
+						<li><a class="{% if page == 'habitat' %}active{% endif %}" href="{{ url_for('habitat.home') }}">Habitat</a></li>
 					</ul>
 				</nav>
 			</grid-item>
@@ -33,7 +33,7 @@
 		</grid-container>
 	</section>
 
-	<div class="mt-3">
+	<div class="mt-5">
 		{% block container %}{% endblock%}
 	</div>
 
