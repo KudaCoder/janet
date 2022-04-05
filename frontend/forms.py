@@ -1,8 +1,14 @@
-from flask_wtf import FlaskForm
-from wtforms import DateTimeField, FloatField, TimeField
+from wtforms import (
+    DateTimeField,
+    FloatField,
+    TimeField,
+    IntegerField,
+    SelectField,
+)
 from wtforms.validators import DataRequired
+from flask_wtf import FlaskForm
 
-from datetime import datetime, time
+from datetime import time, datetime
 
 
 class ConfigForm(FlaskForm):
@@ -22,11 +28,19 @@ class ConfigForm(FlaskForm):
                 continue
             if isinstance(value, str):
                 try:
-                    value = datetime.fromisoformat(value)
+                    value = time.fromisoformat(value)
                 except ValueError:
                     try:
-                        value = time.fromisoformat(value)
+                        value = datetime.fromisoformat(value)
                     except ValueError:
                         continue
             field.data = value
         return self
+
+
+class ReadingForm(FlaskForm):
+    unit = SelectField(
+        "Unit of time",
+        choices=[("minutes", "Minutes"), ("hours", "Hours"), ("days", "Days")],
+    )
+    time = IntegerField("Time period")
