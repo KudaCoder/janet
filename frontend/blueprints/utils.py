@@ -1,31 +1,38 @@
-from dotenv import load_dotenv
-from datetime import datetime
+from datetime import datetime, time
 import requests
 import json
 import os
+
+from dotenv import load_dotenv
 
 load_dotenv()
 
 API_URL = os.environ.get("HABITAT_URL")
 
 
-# There is no reason for this other than it is easier to use
+def convert_dt_to_iso(data: dict):
+    for k, v in data.items():
+        if isinstance(v, datetime) or isinstance(v, time):
+            data[k] = v.isoformat()
+    return data
+
+
 class APITools:
     def current_reading(self):
         return self.get("/reading/current/")
 
     def add_reading(self, temp=None, hum=None):
-        return self.post("/reading/add/", dict(temp=temp, hum=hum))
+        return self.post("/reading/add/", {"temp": temp, "hum": hum})
 
     def list_readings(self):
         return self.get("/reading/list/")
 
     def find_reading_by_period(self, unit=None, time=None):
-        return self.get("/reading/find/period/", data=dict(unit=unit, time=time))
+        return self.get("/reading/find/period/", data={"unit": unit, "time": time})
 
     def find_reading_by_range(self, dateFrom=None, dateTo=None):
         return self.get(
-            "/reading/find/range/", data=dict(dateFrom=dateFrom, dateTo=dateTo)
+            "/reading/find/range/", data={"dateFrom": dateFrom, "dateTo": dateTo}
         )
 
     def get_config(self):
@@ -36,8 +43,7 @@ class APITools:
 
     def set_config(self, form_data):
         data = form_data
-        data["lights_on_time"] = data["lights_on_time"].isoformat()
-        data["lights_off_time"] = data["lights_off_time"].isoformat()
+        data = convert_dt_to_iso(data)
         return self.post("/config/set/", data=data)
 
     def get(self, url, data=None):
