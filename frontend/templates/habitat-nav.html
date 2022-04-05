@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block container %}
+
+    <section id="habitat">
+        <grid-container id="habitat-container">
+            <grid-item class="habitat-item" id="habitat-side-item">
+                <div class="side-panel">
+                    <h5 class="mt-2">Environment Panel</h5>
+                    <ul>
+                        <li>
+                            <a href="{{ url_for('habitat.readings') }}">Readings</a>
+                        </li>
+                        <li><a href="{{ url_for('habitat.config') }}">Config</a></li>
+                        <li><a href="{{ url_for('habitat.readings') }}">Content 3</a></li>
+                        <li><a href="{{ url_for('habitat.readings') }}">Content 4</a></li>
+                        <li><a href="{{ url_for('habitat.readings') }}">Content 5</a></li>
+                    </ul>
+                </div>
+            </grid-item>
+            <grid-item class="habitat-item" id="habitat-main-item">
+                <div class="habitat-content">
+                    {% block content %}{% endblock %}
+                </div>
+            </grid-item>
+        </grid-container>
+    </section>
+    
+{% endblock %}
+
