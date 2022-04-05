@@ -2,8 +2,6 @@ from frontend.models import migrate, db
 from frontend import blueprints
 from .config import Config
 
-from datetime import datetime
-
 from flask import Flask
 
 
