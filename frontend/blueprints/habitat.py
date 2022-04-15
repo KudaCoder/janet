@@ -43,11 +43,19 @@ def readings():
             title="Habitat Conditions",
         )
         fig = fig.update_xaxes(rangeslider_visible=True)
-        fig.update_layout(width=1400, height=500)
+        fig.update_layout(
+            width=1400,
+            height=500,
+            paper_bgcolor="rgba(0, 0, 0, 0)",
+            plot_bgcolor="rgba(111, 117, 128, .3)",
+            title_font_size=25,
+            modebar={"bgcolor": "rgba(236, 236, 236, 1)"},
+        )
         habi_graph = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
 
     context = {
         "page": "habitat",
+        "content": "reading",
         "form": form,
         "habitat_graph": habi_graph,
     }
@@ -63,5 +71,5 @@ def config():
     config = api_tools.get_config()
     form.populate_form(config)
 
-    context = {"page": "habitat", "form": form}
+    context = {"page": "habitat", "content": "config", "form": form}
     return render_template("config.html", **context)
