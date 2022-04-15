@@ -1,36 +1,141 @@
 {% extends "habitat-nav.html" %}
 
 {% block content %}
+	<div class="config-content">
+		<div><div class="row">
+			<h2 class="text-center mt-2 mb-5">Config</h2>
+		</div></div>
 
-	<h5 class="text-center mt-2">Config</h5>
+		<form action="{{ url_for('habitat.config') }}" method="POST" id="env_config_form_id">
+			{{ form.csrf_token }}
 
-	<form action="{{ url_for('habitat.config') }}" method="POST" id="env_config_form_id">
-		{{ form.csrf_token }}
+			<div>
+				<div class="row">
+					<div class="col mb-4">
+						<div class="tile day-temp d-flex flex-column align-items-center">
+							{{ form.day_l_sp.label(class="d-flex align-items-center justify-content-center") }} 
+							<div class="adjustable">
+								<div class="up-arrow">
+									<i class="fa-solid fa-chevron-up"></i>
+								</div>
+								{{ form.day_l_sp }}
+								<div class="down-arrow">
+									<i class="fa-solid fa-chevron-down"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col right-col mb-4">
+						<div class="tile day-temp d-flex flex-column align-items-center">
+							{{ form.day_h_sp.label(class="d-flex align-items-center justify-content-center") }}
+							<div class="adjustable">
+								<div class="up-arrow">
+									<i class="fa-solid fa-chevron-up"></i>
+								</div>
+								{{ form.day_h_sp }}
+								<div class="down-arrow">
+									<i class="fa-solid fa-chevron-down"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col mb-4">
+						<div class="tile night-temp d-flex flex-column align-items-center">
+							{{ form.night_l_sp.label(class="d-flex align-items-center justify-content-center") }}
+							<div class="adjustable">
+								<div class="up-arrow">
+									<i class="fa-solid fa-chevron-up"></i>
+								</div>
+								{{ form.night_l_sp }}
+								<div class="down-arrow">
+									<i class="fa-solid fa-chevron-down"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col right-col mb-4">
+						<div class="tile night-temp d-flex flex-column align-items-center">
+							{{ form.night_h_sp.label(class="d-flex align-items-center justify-content-center") }}
+							<div class="adjustable">
+								<div class="up-arrow">
+									<i class="fa-solid fa-chevron-up"></i>
+								</div>
+								{{ form.night_h_sp }}
+								<div class="down-arrow">
+									<i class="fa-solid fa-chevron-down"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col mb-4">
+						<div class="tile time d-flex flex-column align-items-center">
+							{{ form.lights_on_time.label(class="d-flex align-items-center justify-content-center") }}
+							<div class="up-arrow">
+								<i class="fa-solid fa-chevron-up"></i>
+							</div>
+							{{ form.lights_on_time }}
+							<div class="down-arrow">
+								<i class="fa-solid fa-chevron-down"></i>
+							</div>
+						</div>
+					</div>
+					<div class="col right-col mb-4">
+						<div class="tile time d-flex flex-column align-items-center">
+							{{ form.lights_off_time.label(class="d-flex align-items-center justify-content-center") }}
+							<div class="up-arrow">
+								<i class="fa-solid fa-chevron-up"></i>
+							</div>
+							{{ form.lights_off_time }}
+							<div class="down-arrow">
+								<i class="fa-solid fa-chevron-down"></i>
+							</div>
+						</div>
+					</div>
+				</div>
 
-		<div>
-			<div class="tile left">
-				{{ form.day_h_sp.label }} {{ form.day_h_sp }}
+				<div class="row">
+					<div class="col mb-4">
+						<div class="tile humidity d-flex flex-column align-items-center">
+							{{ form.humidity_low_sp.label(class="d-flex align-items-center justify-content-center") }}
+							<div class="adjustable">
+								<div class="up-arrow">
+									<i class="fa-solid fa-chevron-up"></i>
+								</div>
+								{{ form.humidity_low_sp }}
+								<div class="down-arrow">
+									<i class="fa-solid fa-chevron-down"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col right-col mb-4">
+						<div class="tile humidity d-flex flex-column align-items-center">
+							{{ form.humidity_high_sp.label(class="d-flex align-items-center justify-content-center") }}
+							<div class="adjustable">
+								<div class="up-arrow">
+									<i class="fa-solid fa-chevron-up"></i>
+								</div>
+								{{ form.humidity_high_sp }}
+								<div class="down-arrow">
+									<i class="fa-solid fa-chevron-down"></i>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="mt-2 mb-4 text-center">
+						{{ form.created.label }} - {{ form.created.data | pretty_dt }}
+					</div>
+					<button id="save-btn" class="button mb-4" type="submit">Save Changes</button>
+				</div>
 			</div>
-			<div class="tile left">
-				{{ form.day_l_sp.label }} {{ form.day_l_sp }}
-			</div>
-			<div class="tile left">
-				{{ form.night_h_sp.label }} {{ form.night_h_sp }}
-			</div>
-			<div class="tile left">
-				{{ form.night_l_sp.label }} {{ form.night_l_sp }}
-			</div>
-			<div class="tile left">
-				{{ form.lights_on_time.label }} {{ form.lights_on_time }}
-			</div>
-			<div class="tile left">
-				{{ form.lights_off_time.label }} {{ form.lights_off_time }}
-			</div>
-			<div class="mt-2 left">
-				{{ form.created.label }} - {{ form.created.data | pretty_dt }}
-			</div>
-			<button id="save-btn" class="btn btn-primary left" type="submit">Save Changes</button>
-		</div>
-	</form>
-	
+		</form>
+	</div>
+
 {% endblock %}
