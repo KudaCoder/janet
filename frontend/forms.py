@@ -18,7 +18,11 @@ class ConfigForm(FlaskForm):
     night_l_sp = FloatField("Night Low Set Point", validators=[DataRequired()])
     lights_on_time = TimeField("Day Lights On Time", validators=[DataRequired()])
     lights_off_time = TimeField("Day Lights Off Time", validators=[DataRequired()])
-    created = DateTimeField("Config Created Date")
+    humidity_high_sp = FloatField(
+        "Humidity High Set Point", validators=[DataRequired()]
+    )
+    humidity_low_sp = FloatField("Humidity Low Set Point", validators=[DataRequired()])
+    created = DateTimeField("Config Created")
 
     def populate_form(self, data):
         for name, value in data.items():
@@ -40,7 +44,7 @@ class ConfigForm(FlaskForm):
 
 class ReadingForm(FlaskForm):
     unit = SelectField(
-        "Unit of time",
+        "Unit of Time",
         choices=[("minutes", "Minutes"), ("hours", "Hours"), ("days", "Days")],
     )
-    time = IntegerField("Time period")
+    time = IntegerField("Time Period")
