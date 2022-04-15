@@ -1,6 +1,7 @@
 from frontend.models import migrate, db
 from frontend import blueprints
 from .config import Config
+from .assets import assets
 
 from flask import Flask
 
@@ -13,6 +14,8 @@ migrate.init_app(app, db)
 
 app.register_blueprint(blueprints.public.bp)
 app.register_blueprint(blueprints.habitat.bp)
+
+assets.init_app(app)
 
 
 @app.template_filter()

@@ -1,0 +1,60 @@
+section#nav-bar {
+    height:  var(--nav-height);
+    box-shadow: 0 1px 5px 0 grey;
+}
+
+grid-container#nav-container {
+    display: grid;
+    grid-template-columns: 15% 1fr 15%;
+    grid-gap: 10px;
+    grid-template-areas: "column-1 column-2 column-3";
+    height: var(--nav-height);
+}
+
+grid-item#nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+nav li {
+    display: inline-block;
+    position:  relative;
+}
+
+nav ul a {
+    text-decoration: none;
+    color: black;
+    display:  block;
+    padding: var(--nav-v-pad) 2.5rem;
+    border-radius: var(--nav-border-radius);
+
+    transition: background-color 150ms ease-in,
+        color 300ms ease-out;
+}
+
+nav ul a:hover {
+    color: var(--nav-text-hover);
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    background-color: var(--nav-active);
+    height: .3rem;
+    bottom: 0;
+    left: 10%;
+    width: 80%;
+    border-radius: var(--nav-border-radius);
+    transform: scaleX(0);
+    transition: transform 350ms ease;
+}
+
+nav a:hover::after {
+    transform: scaleX(1);
+    transition: transform 350ms ease;
+}
+
+nav a.active::after {
+    transform: scaleX(1);
+}

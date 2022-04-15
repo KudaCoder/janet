@@ -1,0 +1,104 @@
+.config-content {
+    max-width: 95vw;
+    margin: 0 auto;
+}
+
+.tile {
+    position: relative;
+    width: 350px;
+    height: 200px;
+    text-align: center;
+    box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.15);
+    border-radius: 10px;
+}
+
+.right-col {
+    display: flex;
+    align-items: right;
+    justify-content: right;
+    margin-left: 5rem;
+}
+
+.tile input {
+    width: 50%;
+    border: none;
+    text-align: center;;
+    font-size: 30px;
+    margin-top: 5%;
+}
+
+.tile input:focus {
+    outline: none;
+}
+
+.tile label {
+    width: 100%;
+    background-color: white;
+    font-size: 20px;
+    border-radius: 10px 10px 0 0;
+    height: 40px;
+    font-weight: 600;
+}
+
+.tile.day-temp {
+    background-color: var(--day-tile-bg);
+}
+
+.tile.day-temp input {
+    background-color: var(--day-tile-bg);
+}
+
+.tile.night-temp {
+    background-color: var(--night-tile-bg);
+}
+
+.tile.night-temp input {
+    background-color: var(--night-tile-bg);
+}
+
+.tile.time {
+    background-color: var(--time-tile-bg);
+}
+
+.tile.time input {
+    background-color: var(--time-tile-bg);
+    margin-left: 20px;
+}
+
+.tile.humidity {
+    background-color: var(--hum-tile-bg);
+}
+
+.tile.humidity input {
+    background-color: var(--hum-tile-bg);
+}
+
+.up-arrow {
+    background-color: #ececec;
+    cursor: pointer;
+    border-radius: 0 0 25px 25px;
+    width: 20%;
+    height: 40px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chev {
+    vertical-align: middle;
+}
+
+.down-arrow {
+    position: absolute;
+    bottom: 0;
+    background-color: #ececec;
+    cursor: pointer;
+    border-radius: 25px 25px 0 0;
+    width: 20%;
+    height: 40px;
+    right: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

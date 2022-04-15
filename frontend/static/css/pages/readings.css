@@ -1,0 +1,17 @@
+.readings-content {
+    max-width: 20%;
+    margin: 0 auto;
+}
+
+.inputs {
+    width: 6rem;
+    height: 2rem;
+    margin-left: 5px;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.15);
+    border: 1px solid black;
+}
+
+.inputs:focus {
+    outline: none;
+}
