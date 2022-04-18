@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block container%}
+
+    <div id="register-content" class="mt-5">
+        <h1 class="text-center fancy">Register User</h1>
+
+        <form action="" method="POST">
+            {{ form.csrf_token() }}
+            
+            <div class="row mt-3">
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    <div class="col">
+                        <h5>{{ form.username.label(class="dopey align-items-center pt-2") }}</h5>
+                    </div>
+                    <div class="col">
+                        <span>{{ form.username(class_="login-input", autocomplete="username") }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="d-flex flex-column align-items-center">
+                    <div class="col">
+                        <h5>{{ form.password1.label(class="dopey align-items-center pt-2") }}</h5>
+                    </div>
+                    <div class="col">
+                        <span>{{ form.password1(class_="login-input", autocomplete="nope") }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-3">
+                <div class="d-flex flex-column align-items-center">
+                    <div class="col">
+                        <h5>{{ form.password2.label(class="dopey align-items-center pt-2") }}</h5>
+                    </div>
+                    <div class="col">
+                        <span>{{ form.password2(class_="login-input", autocomplete="nope") }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="d-flex justify-content-center">
+                    {{ form.submit(class="button") }}
+                </div>
+            </div>
+        </form>
+
+    </div>    
+
+
+{% endblock %}
