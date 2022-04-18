@@ -1,21 +1,16 @@
-from flask import Flask
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
 
-from frontend.config import Config
 
-app = Flask(__name__)
-app.config.from_object(Config)
-
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
+db = SQLAlchemy()
+migrate = Migrate()
 
 
 def init_app(app):
-    db.init_app(db)
+    db.init_app(app)
     migrate.init_app(app, db)
 
 
-from .user import User
-from .work import Client, Project, Task
-from .utils import WorkUtils, UserUtils
+from .user import User  # noqa
+from .work import Client, Project, Task  # noqa
+from .utils import WorkUtils, UserUtils  # noqa
