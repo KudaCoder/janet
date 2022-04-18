@@ -2,7 +2,7 @@
 
 {% block container%}
 
-    <div id="login-content" class="mt-5">
+    <div id="login-content">
         <h1 class="text-center fancy">Login User</h1>
 
         <form action="" method="POST">
@@ -38,7 +38,7 @@
 
             <div class="row mt-1">
                 <div class="d-flex justify-content-center main-text">
-                    <small>Not registered?? Register <a id="not-registered" href="{{ url_for('public.register') }}">here</a></small>
+                    <small>Not registered? <a id="not-registered" href="{{ url_for('public.register') }}">Register here</a></small>
                 </div>
             </div>
         </form>

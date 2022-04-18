@@ -10,6 +10,11 @@
     background-color: var(--main-bg);
 }
 
+#login-content,
+#register-content {
+    margin-top: 7rem;
+}
+
 #login-content input#submit,
 #register-content input#submit {
     width: 20rem;
