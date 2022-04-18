@@ -1,3 +1,4 @@
+from requests import ConnectionError
 from datetime import datetime, time
 import requests
 import json
@@ -21,18 +22,24 @@ class APITools:
     def current_reading(self):
         return self.get("/reading/current/")
 
-    def add_reading(self, temp=None, hum=None):
-        return self.post("/reading/add/", {"temp": temp, "hum": hum})
+    def add_reading(self, **kwargs):
+        return self.post(
+            "/reading/add/", {"temp": kwargs["temp"], "hum": kwargs["hum"]}
+        )
 
     def list_readings(self):
         return self.get("/reading/list/")
 
-    def find_reading_by_period(self, unit=None, time=None):
-        return self.get("/reading/find/period/", data={"unit": unit, "time": time})
-
-    def find_reading_by_range(self, dateFrom=None, dateTo=None):
+    def find_reading_by_period(self, **kwargs):
         return self.get(
-            "/reading/find/range/", data={"dateFrom": dateFrom, "dateTo": dateTo}
+            "/reading/find/period/",
+            data={"unit": kwargs["unit"], "time": kwargs["time"]},
+        )
+
+    def find_reading_by_range(self, **kwargs):
+        return self.get(
+            "/reading/find/range/",
+            data={"dateFrom": kwargs["dateFrom"], "dateTo": kwargs["dateTo"]},
         )
 
     def get_config(self):
@@ -49,11 +56,20 @@ class APITools:
     def get(self, url, data=None):
         if data is not None:
             data = json.dumps(data)
+        try:
+            resp = requests.get(
+                f"{API_URL}{url}",
+                json=data,
+            )
+        except ConnectionError:
+            return
 
-        return requests.get(
-            f"{API_URL}{url}",
-            json=data,
-        ).json()
+        return resp.json()
 
     def post(self, url, data):
-        return requests.post(f"{API_URL}{url}", json=json.dumps(data)).json()
+        try:
+            resp = requests.post(f"{API_URL}{url}", json=json.dumps(data))
+        except ConnectionError:
+            return
+
+        return resp.json()
