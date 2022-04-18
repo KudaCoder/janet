@@ -6,7 +6,7 @@
         <grid-container id="habitat-container">
             <grid-item class="habitat-item" id="habitat-side-item">
                 <nav class="side-panel">
-                    <h5 class="mt-2">Environment Panel</h5>
+                    <h5 id="env-header" class="mt-2 dopey">Environment Panel</h5>
                     <ul>
                         <li class="side-nav-pill">
                             <a class="text-center {% if content == 'reading' %}active{% endif %}" href="{{ url_for('habitat.readings') }}">Readings</a>

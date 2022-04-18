@@ -1,6 +1,6 @@
 section#nav-bar {
     height:  var(--nav-height);
-    box-shadow: 0 1px 5px 0 grey;
+    box-shadow: var(--subtle-shadow);
 }
 
 grid-container#nav-container {
@@ -11,10 +11,14 @@ grid-container#nav-container {
     height: var(--nav-height);
 }
 
-grid-item#nav-item {
+grid-item#nav-buttons {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+grid-item#nav-buttons a {
+    font-size: 30px;
 }
 
 nav li {
@@ -24,6 +28,7 @@ nav li {
 
 nav ul a {
     text-decoration: none;
+    font-family: var(--dopey-font);
     color: black;
     display:  block;
     padding: var(--nav-v-pad) 2.5rem;
@@ -57,4 +62,74 @@ nav a:hover::after {
 
 nav a.active::after {
     transform: scaleX(1);
+}
+
+#logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#logo div {
+    height: calc(var(--nav-height) - 1.9rem);
+    width: 118px;
+    border: 3px solid grey;
+    box-shadow: var(--subtle-shadow);
+    border-radius: var(--nav-border-radius);
+}
+
+#logo img {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    border-radius: var(--nav-border-radius);
+}
+
+#user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#user a {
+    text-decoration: none;
+}
+
+#login-btn {
+    min-width: 7rem;
+    width: fit-content;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+#dropdown-btn {
+    min-width: 7rem;
+    width: fit-content;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: var(--main-bg);
+    min-width: 9rem;
+    width: fit-content;
+    border-radius: var(--nav-border-radius);
+    z-index: 1;
+    margin-top: .5rem;
+}
+
+.dropdown-content a {
+    box-shadow: var(--subtle-shadow);
+    margin-top: .25rem;
+    color: black;
+    padding: 5px 0 !important;
+    text-decoration: none;
+    display: block;
+}
+
+.show {
+    display:block;
 }

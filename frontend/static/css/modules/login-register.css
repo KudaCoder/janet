@@ -1,0 +1,21 @@
+.login-input {
+    width: 15rem;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    font-family: var(--main-font);
+    border-radius: var(--nav-border-radius);
+    box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.15);
+    border: 1px solid black;
+    background-color: var(--main-bg);
+}
+
+#login-content input#submit,
+#register-content input#submit {
+    width: 20rem;
+}
+
+#not-registered {
+    text-decoration: none;
+    color: black;
+}

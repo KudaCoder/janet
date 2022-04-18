@@ -17,6 +17,7 @@ janet_css = Bundle(
     "css/styles.css",
     "css/pages/config.css",
     "css/pages/readings.css",
+    "css/modules/login-register.css",
     "css/modules/habi-nav.css",
     "css/modules/nav-bar.css",
 )

@@ -1,33 +1,33 @@
 {% extends "habitat-nav.html" %}
 
 {% block content %}
-<div class="readings-content">
-    <h2 class="text-center mt-2">Readings</h2>
+    <div id="readings-content">
+        <h2 class="text-center mt-2 fancy">Readings</h2>
 
-    <form action="{{ url_for('habitat.readings') }}" method="POST" id="readings_form">
-        {{ form.csrf_token() }}
-    
-        <div class="row mt-3">
-            <div class="col">
-                <h5 class="pe-1">{{ form.unit.label }}</h5>
-                <span class="ps-1 pe-4">{{ form.unit(class="text-center inputs") }}</span>
-            </div>
-            <div class="col">
-                <h5 class="pe-1">{{ form.time.label }}</h5>
-                <span class="ps-1">{{ form.time(class="text-center inputs") }}</span>
-            </div>
-        </div>
-        <div>
+        <form action="{{ url_for('habitat.readings') }}" method="POST" id="readings_form">
+            {{ form.csrf_token() }}
+        
             <div class="row mt-3">
-                <button id="submit-btn" class="button" type="submit">Show Graph</button>
+                <div class="col">
+                    <h5 class="pe-1">{{ form.unit.label(class="main-text") }}</h5>
+                    <span class="ps-1 pe-4">{{ form.unit(class="text-center inputs") }}</span>
+                </div>
+                <div class="col">
+                    <h5 class="pe-1">{{ form.time.label(class="main-text") }}</h5>
+                    <span class="ps-1">{{ form.time(class="text-center inputs") }}</span>
+                </div>
             </div>
-        </div>
-    </form>
+            <div>
+                <div class="row mt-3">
+                    <button id="submit-btn" class="button" type="submit">Show Graph</button>
+                </div>
+            </div>
+        </form>
 
-</div>
-<div class="mt-4">
-    <div id="habi_graph" class="ms-3"></div>
-</div>
+    </div>
+    <div class="mt-4">
+        <div id="habi_graph" class="ms-3"></div>
+    </div>
 
 {% endblock %}
 

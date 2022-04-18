@@ -1,4 +1,4 @@
-.readings-content {
+#readings-content {
     max-width: 20%;
     margin: 0 auto;
 }
@@ -10,6 +10,8 @@
     border-radius: 4px 4px 4px 4px;
     box-shadow: 2px 2px 4px 0 rgba(0,0,0,0.15);
     border: 1px solid black;
+    font-family: var(--main-font);
+    background-color: var(--main-bg);
 }
 
 .inputs:focus {
