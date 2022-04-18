@@ -3,8 +3,12 @@
 {% block content %}
     
     <div class="">
-        <h2 class="text-center">Current Conditions</h2>
-        <p class="text-center">Temp - {{ reading.temp }}  --  Hum - {{ reading.hum }}</p>
+        <h2 class="text-center fancy">Current Conditions</h2>
+        {% if reading %}
+            <p class="text-center">Temp - {{ reading.temp }}  --  Hum - {{ reading.hum }}</p>
+        {% else %}
+            <p class="text-center">API connection failed.  Please contact system administrator!</p>
+        {% endif %}
     </div>
 
 {% endblock %}
