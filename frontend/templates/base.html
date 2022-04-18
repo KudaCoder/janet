@@ -1,54 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-	{% assets "css" %}
-    	<link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
-    {% endassets %}
-	<title>Janet</title>
-</head>
-<body>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Courgette&family=Josefin+Sans:wght@400&display=swap" rel="stylesheet">
 
-	<section id="nav-bar">
-		<grid-container id="nav-container">
-			<grid-item>
-				<div>
-					LOGO
-				</div>
-			</grid-item>
-			<grid-item id="nav-item">
-				<nav>
-					<ul>
-						<li class="main-nav"><a class="{% if page == 'home' %}active{% endif %}" href="{{ url_for('public.home') }}">Home</a></li>
-						<li class="main-nav"><a class="{% if page == 'about' %}active{% endif %}" href="{{ url_for('public.about') }}">About</a></li>
-						<li class="main-nav"><a class="{% if page == 'habitat' %}active{% endif %}" href="{{ url_for('habitat.home') }}">Habitat</a></li>
-					</ul>
-				</nav>
-			</grid-item>
-			<grid-item>
-				<div>
-					USER DETAILS
-				</div>
-			</grid-item>
-		</grid-container>
-	</section>
+		{% assets "css" %}
+	    	<link rel="stylesheet" type="text/css" href="{{ ASSET_URL }}" />
+	    {% endassets %}
 
-	{% block container %}{% endblock%}
+		<title>Janet</title>
+	</head>
+	<body>
 
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
-	<script src="https://code.jquery.com/jquery-3.6.0.slim.js" 
-			integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" 
-			crossorigin="anonymous">
-	</script>
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+		<section id="nav-bar">
+			<grid-container id="nav-container">
+				<grid-item id="logo">
+					<div>
+						<img src="/static/images/logos/janet-logo.png" alt="">
+					</div>
+				</grid-item>
+				<grid-item id="nav-buttons">
+					<nav>
+						<ul>
+							<li class="main-nav"><a class="{% if page == 'home' %}active{% endif %}" href="{{ url_for('public.home') }}">Home</a></li>
+							<li class="main-nav"><a class="{% if page == 'about' %}active{% endif %}" href="{{ url_for('public.about') }}">About</a></li>
+							<li class="main-nav"><a class="{% if page == 'habitat' %}active{% endif %}" href="{{ url_for('habitat.home') }}">Habitat</a></li>
+						</ul>
+					</nav>
+				</grid-item>
+				<grid-item id="user">
+					{% if current_user.is_authenticated %}
+						<div class="dropdown">
+							<button id="dropdown-btn" class="button">
+								{{ current_user.username }}
+							</button>
+							<div id="user-dropdown" class="dropdown-content">
+								<a href="{{ url_for('public.logout') }}" class="button text-center">Logout</a>
+								<a href="" class="button text-center">Link 2</a>
+								<a href="" class="button text-center">Link 3</a>
+							</div>
+						</div>	
+					{% else %}
+						<div id="login-btn">
+							<a href="{{ url_for('public.login') }}" class="button text-center">Login</a>
+						</div>
+					{% endif %}
+				</grid-item>
+			</grid-container>
+		</section>
 
-	{% assets "js" %}
-	    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
-    {% endassets %}
-	{% block scripts %}{% endblock %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+				<div class="row">
+				    <div class="mt-5 d-flex justify-content-center">
+	                    {% for category, message in messages %}
+	                        <div class="error-msg alert alert-{% if category == 'error' %}danger{% else %}success{% endif %} alert-dismissible" 
+	                            role="alert">
+	                            {{ message }}
+	                        </div>
+	                    {% endfor %}
+			        </div>
+			    </div>
+            {% endif %}
+        {% endwith %}
 
-</body>
+		{% block container %}{% endblock%}
+
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.0.slim.js" 
+				integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" 
+				crossorigin="anonymous">
+		</script>
+		<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+		{% assets "js" %}
+		    <script type="text/javascript" src="{{ ASSET_URL }}"></script>
+	    {% endassets %}
+
+		{% block scripts %}{% endblock %}
+
+	</body>
 </html>
