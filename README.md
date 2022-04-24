@@ -9,3 +9,4 @@ There is likely local packages that will need to be installed to make Janet work
 
 ***REQUIRED***
 sudo apt-get install python3-dev default-libmysqlclient-dev build-essential
+sudo apt install portaudio19-dev
